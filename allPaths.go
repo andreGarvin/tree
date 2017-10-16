@@ -1,3 +1,4 @@
+// Recursively goes through directroy and returns back all the paths in that directory
 package allPaths
 
 import (
@@ -42,13 +43,13 @@ func Dirs( path string ) ( []string, error ) {
 
     err := isAbs(path)
     if err != nil {
-        return paths, err
+        return nil, err
     }
 
     justDirs = true
     justAll = false
     if err := recursiveTreeDive(path, fs); err != nil {
-        return paths, err
+        return nil, err
     }
     returnedPaths = paths
     paths = []string {}
@@ -61,18 +62,18 @@ func WithExt( path string, ext string ) ( []string, error ) {
 
       err := isAbs(path)
       if err != nil {
-          return paths, err
+          return nil, err
       }
 
       if !strings.Contains(ext, ".") {
           extString = "." + ext
           if err := recursiveTreeDive(path, fs); err != nil {
-              return paths, err
+              return nil, err
           }
           return paths, nil
       }
       if err := recursiveTreeDive(path, fs); err != nil {
-          return paths, err
+          return nil, err
       }
       returnedPaths = paths
       paths = []string {}
